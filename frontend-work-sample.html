@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A scoped CSV cleanup service by Nicholas Alejos. Inspect an example audit and check whether your file fits the $99 service.">
+  <title>CSV cleanup with a clear audit | Nicholas Automation Lab</title>
+  <style>:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#152438;background:#f5f7fa;font-size:16px;line-height:1.5;font-synthesis:none;--blue:#164dcc;--muted:#586577;--border:#d8e0e9}*{box-sizing:border-box}body{margin:0}a{color:var(--blue);text-underline-offset:4px}button,input,select{font:inherit}button,a,input,select,summary{touch-action:manipulation}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #e59113;outline-offset:4px}.skip{position:absolute;top:-100px;padding:12px;background:#fff;z-index:3}.skip:focus{top:0}.header,main,footer{max-width:1200px;margin:auto;padding-left:36px;padding-right:36px}.header{display:flex;justify-content:space-between;align-items:center;padding-top:28px;padding-bottom:24px}.brand{display:flex;gap:12px;align-items:center;color:inherit;text-decoration:none;font-size:.875rem;line-height:1.25}.brand-mark{background:#152438;color:#fff;padding:8px 10px;font-size:1.4rem;font-weight:800}.brand strong{font-weight:700}.text-link{font-size:.9rem;font-weight:600}.intro{padding:36px 0 32px;max-width:770px}.eyebrow{font-size:.75rem;letter-spacing:.12em;font-weight:750;color:var(--blue);margin:0 0 12px}.intro h1{font-size:clamp(2.5rem,5vw,4.1rem);letter-spacing:-.045em;line-height:1.08;margin:0 0 20px}.lede{font-size:1.125rem;line-height:1.65;color:var(--muted);max-width:680px;margin:0}.workspace{display:grid;grid-template-columns:1.5fr 1fr;gap:24px;align-items:start}.panel{background:#fff;border:1px solid var(--border);padding:28px;border-radius:10px;box-shadow:0 4px 18px #172c4310}.section-heading{display:flex;justify-content:space-between;gap:16px;align-items:start}h2{font-size:1.4rem;line-height:1.25;letter-spacing:-.025em;margin:0 0 16px}.pill{font-size:.75rem;background:#eef2f7;color:#586577;white-space:nowrap;padding:5px 9px;border-radius:4px}.scenario-controls{display:flex;align-items:center;gap:16px;margin:20px 0}.scenario-controls label{margin:0;flex:1}.scenario-controls select{width:auto;max-width:62%;font-size:.875rem}.table-wrap{overflow-x:auto;margin:0 -8px}table{border-collapse:collapse;width:100%;min-width:420px;font-size:.875rem}th{text-align:left;background:#f2f5fa;color:#546174;font-size:.75rem;font-weight:650;padding:12px 9px;border-bottom:1px solid var(--border)}td{padding:16px 9px;border-bottom:1px solid #e7edf4}td:nth-child(1),td:nth-child(2),td:nth-child(3){font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace}td:nth-child(1){color:var(--muted)}.tag{display:inline-block;padding:3px 6px;border-radius:3px;font-size:.75rem;font-weight:650;white-space:nowrap}.changed{color:#164dcc;background:#eaf0ff}.rejected{color:#973d17;background:#fff0e4}.kept{color:#246042;background:#eaf5ef}.audit-counts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.audit-counts strong{font-size:1.6rem;font-variant-numeric:tabular-nums;display:block;line-height:1.3}.audit-counts span{font-size:.75rem;color:var(--muted)}details{font-size:.9rem}summary{cursor:pointer;font-weight:650}details p{color:var(--muted);line-height:1.6}.fine{font-size:.8rem;color:var(--muted);line-height:1.6;margin:18px 0 0}.helper{font-size:.9rem;color:var(--muted);margin:0 0 22px}label{font-size:.875rem;font-weight:600;display:block;margin-bottom:6px}input,select{display:block;border:1px solid #b9c7d7;background:#fff;color:#152438;padding:10px 12px;border-radius:5px;width:100%;min-height:45px}form>input,form>select{margin-bottom:17px}.input-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:17px}.button{display:block;text-align:center;cursor:pointer;background:var(--blue);color:white;font-weight:700;font-size:.9rem;border:1px solid var(--blue);padding:12px 16px;border-radius:5px;text-decoration:none;width:100%}.button:hover{background:#103c9e}.secondary{background:#fff;color:var(--blue)}.secondary:hover{background:#eaf0ff}.result{background:#f1f5ff;border-left:3px solid var(--blue);padding:15px 16px;margin:20px 0 14px;font-size:.875rem}.result strong{font-size:1.1rem;display:block;margin-bottom:5px}.result p{margin:0}.result.review{background:#fff6ec;border-color:#a8580f}.delivery{display:grid;grid-template-columns:1fr 2fr;gap:44px;border-bottom:1px solid var(--border);padding:48px 0}.delivery ul{list-style:none;padding:0;margin:0;display:grid;gap:20px}.delivery li{display:grid;grid-template-columns:1fr 2fr;gap:20px}.delivery li span{color:var(--muted);font-size:.9rem}.limitations{padding:32px 0;display:grid;grid-template-columns:1fr 2fr;gap:44px}.limitations h2{font-size:1.05rem}.limitations p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.7}footer{padding-top:24px;padding-bottom:32px;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted)}footer p{margin:4px 0}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:940px){.workspace{grid-template-columns:1fr 1fr}.panel{padding:22px}.section-heading{display:block}.pill{display:inline-block}.scenario-controls{display:block}.scenario-controls select{max-width:100%;width:100%;margin-top:8px}.audit-counts{gap:8px}}@media(max-width:740px){.header,main,footer{padding-left:20px;padding-right:20px}.header{padding-top:20px}.intro{padding-top:20px}.workspace{grid-template-columns:1fr}.intro h1{font-size:2.65rem}.lede{font-size:1rem}.demo{order:2}.fit{order:1}.delivery,.limitations{grid-template-columns:1fr;gap:20px}.delivery li{grid-template-columns:1fr;gap:4px}.section-heading{display:flex}.pill{white-space:normal}.audit-counts strong{font-size:1.4rem}}@media(prefers-reduced-motion:no-preference){.button{transition:background .15s ease}}
+</style><script type="module">
+function checkScope({format, rows, size, columns, locale}) {
+  const rowCount = Number(rows), megabytes = Number(size), numericColumns = Number(columns);
+  if (!Number.isSafeInteger(rowCount) || rowCount < 1 || !Number.isFinite(megabytes) || megabytes <= 0 || !Number.isSafeInteger(numericColumns) || numericColumns < 1) {
+    return {kind:'invalid', title:'Check your numbers', text:'Enter a positive whole number for rows and columns, and a positive file size.'};
+  }
+  const reasons = [];
+  if(format !== 'csv') reasons.push('file format');
+  if(rowCount > 10000) reasons.push('more than 10,000 rows');
+  if(megabytes > 10) reasons.push('file size above 10 MB');
+  if(numericColumns > 5) reasons.push('more than five numeric columns');
+  if(locale !== 'known') reasons.push('mixed or unknown number conventions');
+  if(reasons.length) return {kind:'review', title:'Let’s review the scope', text:'The $99 offer does not cover: '+reasons.join('; ')+'. Send a redacted sample for a separate quote.'};
+  return {kind:'fit', title:'Within the $99 size and format limits', text:'A redacted sample still needs review to confirm the cleanup rules and final scope.'};
+}
+
+
+const form = document.querySelector('#fit-form');
+const result = document.querySelector('#fit-result');
+const inquire = document.querySelector('#inquire');
+const scenario = document.querySelector('#scenario');
+function renderScope() {
+  const values = Object.fromEntries(new FormData(form));
+  const verdict = checkScope(values);
+  result.className = 'result' + (verdict.kind === 'fit' ? '' : ' review');
+  const title = document.createElement('strong'); title.textContent = verdict.title;
+  const explanation = document.createElement('p'); explanation.textContent = verdict.text;
+  result.replaceChildren(title, explanation);
+  const body = `Hi Nicholas,\n\nI'd like a CSV cleanup fit check.\nFormat: ${values.format}\nRows: ${values.rows}\nSize: ${values.size} MB\nNumeric columns: ${values.columns}\nNumber convention: ${values.locale}\n\nDesired result:\n[Describe the change here.]\n\nI will provide 5–10 synthetic or fully redacted rows for review.\n`;
+  inquire.href = 'mailto:nicholasalejos7@gmail.com?subject=CSV%20cleanup%20fit%20check&body='+encodeURIComponent(body);
+  return verdict;
+}
+form.addEventListener('submit', event => {event.preventDefault(); renderScope();});
+form.addEventListener('input', () => {result.replaceChildren(Object.assign(document.createElement('p'), {textContent:'Details changed. Choose “Check scope” to update the result.'})); inquire.href='mailto:nicholasalejos7@gmail.com?subject=CSV%20cleanup%20fit%20check';});
+function renderSample() {
+  const european = scenario.value === 'eu';
+  const rows = [['0001', european ? '1.250,00' : '1,250.00', '1250', 'Changed'], ['0002', european ? '34,50' : '34.50', '34.5', 'Changed'], ['0003','unknown','—','Rejected'], ['0004','0','0','Kept']];
+  const tbody = document.querySelector('#sample-rows'); tbody.replaceChildren();
+  for(const row of rows) {
+    const tr = document.createElement('tr');
+    row.forEach((value,index) => {const td = document.createElement('td'); if(index === 3) {const badge = document.createElement('span'); badge.className='tag '+value.toLowerCase(); badge.textContent=value; td.append(badge);} else td.textContent=value; tr.append(td);});
+    tbody.append(tr);
+  }
+}
+scenario.addEventListener('change', renderSample);
+renderSample(); renderScope();
+
+// Optional browser tool uses the same scope check as the visible form.
+if (document.modelContext?.registerTool) {
+  const controller = new AbortController();
+  try {
+    document.modelContext.registerTool({
+      name: 'configure_scope_check',
+      title: 'Check CSV cleanup scope',
+      description: 'Fill the visible scope form and show whether the file fits the $99 offer. Does not upload a file, send an email, or accept an order.',
+      inputSchema: {
+        type: 'object', additionalProperties: false,
+        properties: {
+          format: {type: 'string', enum: ['csv', 'xlsx', 'unknown']},
+          rows: {type: 'integer', minimum: 1},
+          size: {type: 'number', exclusiveMinimum: 0},
+          columns: {type: 'integer', minimum: 1},
+          locale: {type: 'string', enum: ['known', 'mixed']}
+        }, required: ['format', 'rows', 'size', 'columns', 'locale']
+      },
+      annotations: {readOnlyHint: false, untrustedContentHint: false},
+      execute(input) {
+        if (!input || !['csv','xlsx','unknown'].includes(input.format) || !['known','mixed'].includes(input.locale)
+            || typeof input.rows !== 'number' || typeof input.columns !== 'number' || typeof input.size !== 'number'
+            || checkScope(input).kind === 'invalid' || Object.keys(input).some(key => !['format','rows','size','columns','locale'].includes(key))) {
+          return {content: [{type: 'text', text: 'Invalid scope details. The form was not changed.'}], isError: true};
+        }
+        for (const key of ['format','rows','size','columns','locale']) form.elements.namedItem(key).value = input[key];
+        return {content: [{type: 'text', text: JSON.stringify(renderScope())}]};
+      }
+    }, {signal: controller.signal});
+    window.addEventListener('pagehide', () => controller.abort(), {once: true});
+  } catch { /* Unsupported experimental API leaves the normal form usable. */ }
+}
+
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header"><a class="brand" href="#main"><span class="brand-mark" aria-hidden="true">N/</span><span>Nicholas<br><strong>Automation Lab</strong></span></a><a class="text-link" href="https://github.com/nicholas-automation-lab/csv-audit-cleaner">View the code <span aria-hidden="true">↗</span></a></header>
+<main id="main">
+  <section class="intro"><p class="eyebrow">ONE FILE. AGREED RULES. CHECKED RESULTS.</p><h1>Clean numbers.<br>A clear paper trail.</h1><p class="lede">Fix inconsistent numeric values in a CSV export. Get a cleaned file and a report showing what changed, what was rejected, and where every row went.</p></section>
+  <div class="workspace">
+    <section class="demo panel" aria-labelledby="demo-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / INSPECT THE WORK</p><h2 id="demo-title">A cleanup you can follow</h2></div><span class="pill">Synthetic example</span></div>
+      <div class="scenario-controls"><label for="scenario">Number convention</label><select id="scenario"><option value="us">1,250.00 · decimal point</option><option value="eu">1.250,00 · decimal comma</option></select></div>
+      <div class="table-wrap"><table><caption class="sr-only">Example numeric cleanup results</caption><thead><tr><th scope="col">Record</th><th scope="col">Original amount</th><th scope="col">Result</th><th scope="col">Review</th></tr></thead><tbody id="sample-rows"></tbody></table></div>
+      <div class="audit-counts" aria-label="Example row reconciliation"><div><strong>7</strong><span>input rows</span></div><div><strong>3</strong><span>kept</span></div><div><strong>2</strong><span>rejected</span></div><div><strong>1 + 1</strong><span>blank + duplicate</span></div></div>
+      <details><summary>What happened to the rejected rows?</summary><p>The sample contains an invalid amount and a missing quantity. They stay in the audit with their original values and reasons. No replacement values are guessed.</p></details>
+      <p class="fine">Selected rows from a seven-row synthetic sample. The decimal-comma option illustrates the equivalent format. This table does not process a file. The <a href="https://github.com/nicholas-automation-lab/csv-audit-cleaner">Python sample</a> is freely available with runnable tests.</p>
+    </section>
+    <section class="fit panel" aria-labelledby="fit-title">
+      <p class="eyebrow">02 / CHECK YOUR SCOPE</p><h2 id="fit-title">Does your file fit?</h2><p class="helper">Only describe its size and format here. Your file stays with you.</p>
+      <form id="fit-form">
+        <label for="format">File format</label><select id="format" name="format"><option value="csv">UTF-8 CSV</option><option value="xlsx">Excel workbook (.xlsx)</option><option value="unknown">Not sure</option></select>
+        <div class="input-pair"><div><label for="rows">Data rows</label><input id="rows" name="rows" type="number" min="1" step="1" value="500" required></div><div><label for="size">File size (MB)</label><input id="size" name="size" type="number" min="0.001" step="any" value="1" required></div></div>
+        <label for="columns">Numeric columns to clean</label><input id="columns" name="columns" type="number" min="1" step="1" value="3" required>
+        <label for="locale">Number convention</label><select id="locale" name="locale"><option value="known">One known decimal/group convention</option><option value="mixed">Mixed or unknown conventions</option></select>
+        <button class="button" type="submit">Check scope</button>
+      </form>
+      <div class="result" id="fit-result" role="status" aria-live="polite" aria-atomic="true"></div>
+      <noscript><p>The scope checker needs JavaScript. You can still email a sample brief using the link below.</p></noscript>
+      <a class="button secondary" id="inquire" href="mailto:nicholasalejos7@gmail.com?subject=CSV%20cleanup%20fit%20check">Email a sample brief</a>
+      <p class="fine">No payment is collected here. Price, delivery date and payment terms are confirmed before work starts.</p>
+    </section>
+  </div>
+  <section class="delivery" aria-labelledby="delivery-title"><div><p class="eyebrow">THE $99 SCOPE</p><h2 id="delivery-title">Know what you get.</h2></div><ul><li><strong>One CSV</strong><span>Up to 10 MB, 10,000 rows and five numeric columns.</span></li><li><strong>An audit alongside it</strong><span>Changed cells, rejected rows and reconciled counts. Original file preserved.</span></li><li><strong>One correction round</strong><span>Against agreed rules, with optional exact-row deduplication.</span></li></ul></section>
+  <section class="limitations"><h2>Before we start</h2><p>Email 5–10 synthetic or fully redacted rows and the desired result. Do not send passwords, banking details or private customer records. Excel workbooks, live imports and corrections to business facts need a separately agreed scope.</p></section>
+</main>
+<footer><p>By Nicholas Alejos · <a href="mailto:nicholasalejos7@gmail.com">nicholasalejos7@gmail.com</a></p><p>AI-assisted work, checked with tests. A new service with demonstration data; no client history or sales are claimed.</p></footer>
+</body></html>
