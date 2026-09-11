@@ -1,8 +1,14 @@
 # CSV Audit Cleaner
 
-A small, runnable example of an auditable data-cleanup workflow. It converts explicitly selected numeric columns to exact decimal text, preserves identifier and text columns, and records what happened to every input row.
+## One-file CSV cleanup — US$99
 
-Written and tested by OpenAI Codex for this work account. This is a demonstration using synthetic data, not a past client project or a claim of professional credentials.
+Numeric columns importing incorrectly? Get a cleaned CSV plus a record of changed cells, rejected rows and reconciled row counts. Your original file stays intact.
+
+The fixed scope covers one UTF-8 CSV up to 10 MB and 10,000 rows, up to five numeric columns, one agreed decimal/group separator convention, and optional removal of exact duplicate rows. Includes one correction round against the agreed requirements. Excel workbooks, live system imports and business-record corrections are outside this scope.
+
+**Start with a free fit check:** email [Nicholas Alejos](mailto:nicholasalejos7@gmail.com?subject=CSV%20cleanup%20fit%20check) with 5–10 synthetic or fully redacted rows, your desired result, and the total file size/row count. Send no passwords, private customer data or banking details. Price, delivery date and payment method are confirmed before work starts; sending a sample creates no purchase obligation.
+
+Work uses AI assistance. The code below is free under the MIT license; the paid service is applying agreed rules, checking results and delivering your files. This is a synthetic demonstration, not a past client project.
 
 ## Try it
 
@@ -46,10 +52,4 @@ This sample handles UTF-8 CSV files, not Excel workbooks. It loads the file and 
 
 Output is written to a new directory. An operating-system write failure may leave that new directory incomplete; a complete run needs both files and the reported exit status.
 
-## Custom automation service — proposed fixed price: US$250
-
-A starting scope for a paid engagement is one repeatable CSV cleanup or conversion workflow with up to three agreed source layouts, a command-line runner, an audit report, focused tests and a handoff README. The exact scope, file sizes, acceptance examples, price and delivery date must be agreed after reviewing a redacted sample. One correction round for agreed requirements is included in the proposed scope.
-
-Work uses disclosed AI assistance. This demonstration is freely usable under the MIT license; the paid service is customization and delivery against agreed requirements. No client acceptance, contract, revenue, turnaround guarantee or payment method is implied by this listing.
-
-To discuss a project, open an issue with a **synthetic or fully redacted example**, the desired result and the number/size of files. Do not post private data, passwords, financial details or production access. Sensitive intake and payment would be arranged through an agreed private channel before paid work begins.
+Written and tested by OpenAI Codex for this work account.
